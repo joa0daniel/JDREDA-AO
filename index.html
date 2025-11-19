@@ -1,0 +1,528 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Portfólio: 15 Redações — Encerramento do Ano Letivo</title>
+  <meta name="description" content="Portfólio com as 15 produções das disciplinas de Língua Portuguesa e Redação">
+
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f7f6f4;
+      --card:#ffffff;
+      --accent:#ff6b6b;
+      --text:#222;
+      --muted:#666;
+      --gap:1.25rem;
+      --radius:12px;
+      --max-width:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Poppins',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+    }
+
+
+    .container{
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:1.5rem;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      margin-bottom:1rem;
+    }
+
+    .brand{
+      display:flex;align-items:center;gap:.75rem;
+    }
+    .brand .logo{
+      width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#6a11cb,#2575fc);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;
+    }
+    .brand h1{font-size:1.1rem;margin:0}
+    .brand p{margin:0;font-size:.85rem;color:var(--muted)}
+
+    nav{display:flex;align-items:center;gap:1rem}
+    .nav-links{display:flex;gap:.75rem}
+    .nav-links a{padding:.5rem .75rem;border-radius:8px;text-decoration:none;color:var(--text);font-weight:600}
+    .cta{background:#4224ee;color:#fff;padding:.5rem .75rem;border-radius:8px;text-decoration:none}
+
+    /* Hamburger (mobile) */
+    .hamburger{display:none;cursor:pointer;border:none;background:none}
+    .hamburger .bar{width:24px;height:3px;background:#222;margin:4px 0;border-radius:2px}
+
+    /* ---------------- Hero / filtros ---------------- */
+    .hero{
+      background:linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0.85));
+      padding:1rem;border-radius:14px;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    }
+    .hero .intro{max-width:60%}
+    .hero h2{margin:.25rem 0;font-size:1.25rem}
+    .hero p{margin:0;color:var(--muted)}
+
+    /* ---------------- Grid das redações ---------------- */
+    main{min-height:60vh}
+    .grid{
+      display:grid;
+      gap:var(--gap);
+      grid-template-columns:repeat(3,1fr);
+    }
+
+    article.redacao{
+      background:var(--card);
+      border-radius:12px;
+      overflow:hidden;
+      display:flex;flex-direction:column;justify-content:space-between;
+      box-shadow:0 6px 18px rgba(7, 5, 5, 0.06);
+      transition:transform .18s ease, box-shadow .18s ease;
+      border:4px solid transparent; /* será colorida via classe */
+    }
+    article.redacao:hover{transform:translateY(-6px);box-shadow:0 18px 30px rgba(12,12,12,0.08)}
+
+    .thumb{height:150px;display:block;overflow:hidden}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .content{padding:1rem}
+    .content h3{margin:.25rem 0;font-size:1rem}
+    .content p{margin:.5rem 0;color:var(--muted);font-size:.92rem}
+
+    .meta{display:flex;align-items:center;justify-content:space-between;padding:0 1rem 1rem}
+    .nota{font-weight:700;padding:.35rem .6rem;border-radius:999px;background:rgba(0,0,0,0.05)}
+
+    /* cores das bordas: cada cartão terá uma classe .c1..c15 */
+    .c1{border-color:#FFB3BA}
+    .c2{border-color:#FFDFBA}
+    .c3{border-color:#FFFFBA}
+    .c4{border-color:#BAFFC9}
+    .c5{border-color:#BAE1FF}
+    .c6{border-color:#D7B3FF}
+    .c7{border-color:#FFC9DE}
+    .c8{border-color:#C8FFD4}
+    .c9{border-color:#E6F7FF}
+    .c10{border-color:#FFE7BA}
+    .c11{border-color:#FFCCB3}
+    .c12{border-color:#B3FFD9}
+    .c13{border-color:#D0E7FF}
+    .c14{border-color:#F6D6FF}
+    .c15{border-color:#FFD6A5}
+
+    /* ---------------- Modal de leitura (acessível) ---------------- */
+    .modal{
+      position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);padding:1.5rem;z-index:50
+    }
+    .modal.open{display:flex}
+    .modal-card{background:#fff;border-radius:12px;max-width:900px;width:100%;max-height:90vh;overflow:auto;padding:1.25rem}
+    .modal-card header{display:flex;align-items:center;justify-content:space-between}
+
+    /* ---------------- Footer ---------------- */
+    footer{margin-top:1.5rem;padding:1rem;text-align:center;color:var(--muted)}
+
+    /* ---------------- Responsividade ---------------- */
+    @media (max-width:1000px){
+      .hero .intro{max-width:100%}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:680px){
+      header{flex-direction:column;align-items:flex-start}
+      .nav-links{display:none}
+      .hamburger{display:block}
+      .grid{grid-template-columns:1fr}
+      .thumb{height:190px}
+    }
+
+    a:focus, button:focus{outline:3px solid #232e5e40;outline-offset:2px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">PR</div>
+        <div>
+          <h1>Portfólio — Redações</h1>
+          <p>Encerramento do Ano</p>
+        </div>
+      </div>
+
+      <nav>
+        <div class="nav-links" aria-label="Links principais">
+          <a href="#">Início</a>
+          <a href="#portfolio">Redações</a>
+          <a class="cta" href="#agradecimentos">Agradecimentos</a>
+        </div>
+
+        <button class="hamburger" aria-label="Abrir menu" id="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </nav>
+    </header>
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="intro">
+        <h2 id="hero-title">15 Redações —  Portfólio</h2>
+        <p>Abaixo, estão presentes as 14 redações feitas pelo aluno João Daniel para o "Desafio 100 Dias Redação Paraná", que visa intensificar a aprendizagem dos alunos, especialmente com foco em avaliações como o SAEB e o Enem. </p>
+      </div>
+      <div class="cta-area" aria-hidden="false">
+      </div>
+    </section>
+
+    <main id="portfolio">
+      <section class="grid" role="list">
+
+
+        <!-- 1 -->
+        <article class="redacao c1" role="listitem">
+          <a href="#" class="thumb" data-index="1" data-title="PROCEDIMENTOS ESTÉTICOS" data-text="O filósofo Platão, em O Banquete, defendia que a beleza verdadeira não reside nas aparências, mas sim no mundo das ideias, sendo eterna e independente da forma física. Na contemporaneidade, contudo, esse conceito se perde diante da crescente valorização da estética, com destaque para os jovens expostos a padrões irreais de beleza. A busca pela beleza nessa idade reflete diretamente a pressão social, que se intensifica com as mídias e com a ausência de políticas de educação emocional.
+Diante do exposto, a obra Boca de Ouro, dirigida por Daniel Filho, retrata um bicheiro que substitui toda a sua arcada dentária por próteses de ouro buscando fama e respeito. Tal ação reflete diretamente as atitudes de adolescentes que buscam incessantemente mudar-se esteticamente a fim de se encaixar, conquistar visibilidade e aceitação, em especial nas redes sociais.
+Além disso, a ausência de ensino voltado ao autoconhecimento agrava tal situação. Como apresentado anteriormente pelo filósofo Platão, tais padrões estéticos deixaram de ser expressos como um meio de ideias para se tornarem algo individualista e padronizado. Esse estado não abre portas para o estudo do autoconhecimento e do desenvolvimento intelectual. Essa alienação forçada tem como consequência danos irreversíveis ao psicológico desses jovens, e essa adultização precoce causa adultos inaptos.
+Em suma, a procura por procedimentos estéticos entre os jovens vai além da aceitação, afetando diretamente o psicológico dessa geração. A fim de enfrentar essa problemática, é necessário implementar programas permanentes de educação socioemocional nos institutos de ensino, conduzidos por profissionais qualificados na área da psicologia. Ademais, tais plataformas devem ser reguladas, reduzindo a pressão estética virtual imposta
+Assim, desenvolve-se a intelectualidade dos jovens e sua visão estética de forma verdadeira.">
+            <img src="procedimentos-esteticos-mais-procurados-no-brasil-scaled.jpg">
+          </a>
+          <div class="content">
+            <h3>1. "POR QUE OS PROCEDIMENTOS ESTÉTICOS ESTÃO AUMENTANDO ENTRE OS JOVENS?"</h3>
+            <p>Resumo: É crescente o número de jovens, pós-saídos da adolescência, que procuram as clínicas em busca de um rejuvenescimento ou retardamento do envelhecimento.</p>
+          </div>
+          <div class="meta">
+            <time datetime="30/07/2025">30/07/2025</time>
+            <div class="nota">Nota: 800</div>
+          </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="redacao c2" role="listitem">
+          <a href="#" class="thumb" data-index="2" data-title="ACESSIBILIDADE E INCLUSÃO" data-text="Artigo 5. Direitos de igualdade e não discriminação: a Constituição Federal de 1988 garante a todos os cidadãos o direito à igualdade, sem distinção de qualquer caráter. Infelizmente, a realidade atual para muitas pessoas com deficiência no Brasil ainda esta longe desse ideal. Me deparei com o fato de que, em termos de acessibilidade e inclusão social, restrita a sua participação plena na sociedade, em geral, os obstáculos no caminho para igualdade, a este respeito, são infraestrutura insuficiente e alto grau de preconceito. Em primeiro lugar, a própria deficiência física da sociedade da arquitetura brasileira: Sulcos de paredes, falta de rampas em locais públicos e locais de transporte público inacessíveis são apenas exemplos típicos de falta de acesso de mobilidade ao lazer de trabalho independente.
+Além disso, a acessibilidade não se restringe apenas ao espaço físico. A inclusão efetiva também enfrenta barreiras de ordem social, como o capacitismo. Esse tipo de preconceito, muitas vezes velado, manifesta-se em atitudes que inferiorizam a capacidade de pessoas com deficiencia, ignorando seu potencial e sua contribuição para a sociedade. Para mudar esse cenário, é crucial promover a conscientização e a empatia, desconstruindo estereótipos e valorizando a diversidade numana.
+Portanto, para garantir que os direitos das pessoas com deficiência saiam do papel e se tomem realidade, é necessário que o Estado, em colaboração com a sociedade civil, atue de forma mais efetiva. É essencial que o governo invista na fiscalização e na adequação da infraestrutura pública, garantindo a acessibilidade em todos os espaços. Além disso, é fundamental que as escolas promovam programas de educação inclusiva, incentivando o respeito e a valorização das diferenças desde cedo, para que o Brasil se torne, de fato, um pais para todos.">
+            <img src="mobilidade-inclusao-e-acessibilidade-na-escola-1.webp">
+          </a>
+          <div class="content">
+            <h3>2. "ACESSIBILIDADE E INCLUSÃO DE PESSOAS COM DEFICIÊNCIA NO BRASIL"
+</h3>
+            <p>Resumo: As pessoas com deficiência ainda enfrentam muitas outras barreiras, nem sempre evidentes, que podem e devem ser eliminadas.</p>
+          </div>
+          <div class="meta">
+            <time datetime="04/08/2025">04/08/2025</time>
+            <div class="nota">Nota: 630</div>
+          </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="redacao c3" role="listitem">
+          <a href="#" class="thumb" data-index="3" data-title="QUALIDADE DE VIDA E NO BEM-ESTAR DA POPULAÇÃO" data-text="O propósito de procurar por uma vida plena é comum a todas as pessoas. No entanto, distante da mera interdição de doenças, o que determina a qualidade de vida e bem-estar primeiro e felicidade e satisfação em segundo plano é um fenômeno multifatorial e complexo abrangendo a partir da saúde mental e física até das circunstâncias sociais e ecológicas vivenciadas.
+Um dos quatro pilares do bem-estar é a saúde mental. A longo da vida modera, muitas pessoas são sujeitas à pressão da produtividade e constantemente expostas à vida dos outros através das redes sociais. O resultado disso é um número crescente de pessoas que sofrem de doenças como ansiedade ou depressão. Encontrar um apoio psicológico adequado e ter momentos de descanso são importantes para manter a mente saudável, permitindo que a pessoa lide com os aspectos práticos da vida de uma forma melhor.
+Além disso, a qualidade das relações interpessoais desempenha um papel crucial. O ser humano é um ser social e, por As isso, a conexão com a família, amigos e comunidade é vital. O apoio de pessoas queridas em momentos de dificuldade e a capacidade de compartilhar experiências fortalecem o senso de pertencimento, contribuindo significativamente para a autoestima e a felicidade. Afinal, ninguém consegue viver bem isolado.
+Por fim, não podemos esquecer da sustentabilidade ambiental. A qualidade do ar que respiramos, a água que consumimos e a segurança alimentar são elementos básicos que impactam diretamente a nossa saúde física. Viver em um ambiente limpo e seguro não é apenas um luxo, mas um direito fundamental que garante a saúde e o futuro das próximas gerações. Portanto, para alcançar o verdadeiro bem-estar, é preciso cuidar do planeta.">
+            <img src="artigos-banner-5-qualidade-de-vida.jpg">
+          </a>
+          <div class="content">
+            <h3>
+3. "PRINCIPAIS FATORES QUE INFLUENCIAM NA QUALIDADE DE VIDA E NO BEM-ESTAR DA POPULAÇÃO"</h3>
+            <p>Resumo: O próprio conceito de saúde, aliás, vai além de circunstâncias físicas, como a ausência de doenças. De acordo com a Organização Mundial de Saúde (OMS).</p>
+          </div>
+          <div class="meta">
+            <time datetime="11/08/2025">11/08/2025</time>
+            <div class="nota">Nota: 560</div>
+          </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="redacao c4" role="listitem">
+          <a href="#" class="thumb" data-index="4" data-title="MUDANÇAS CLIMÁTICAS" data-text="O Brasil, abraço territorial e biodiversidade colossal, está padecendo de forma especificailine com as implicações dos efeitos das mudanças climáticas. O aquecimento global, a alteração nos padrões das chuvas e a frequência cada vez mais alta de ocorrências extremas climáticas, como secas e inundações, estão se tornando realidade cada vez mais acontecidaindo no país. Detalhes que devem ser verificados.
+Um dos maiores desafios é sua complexidade. A Amazônia, por exemplo, enfrenta uma estação seca mais longa e intensa, que aumenta o risco de incêndio na floresta e destrói a biodiversidade. No Sul, o que antes era frio e regular agora tem enchentes destruidoras. As mudanças batem diretamente na economia, na agricultura e na vida de milhões de brasileiros.
+Para abordar este cenário, há uma necessidade de que govero, sociedade e setor privado se unam. É necessário investir na tecnologia sustentável, conscientizar a população sobre o meio ambiente e criar políticas públicas para que a preservação da natureza seja incentivada. A fiscalização e combate ao desmatamento em modo ilegal são necessários, além da busca por fontes alternativas de energia que reduzam a emissão de gases do efeito estufa.
+Como mudanças climáticas no Brasil são não um futuro tópico, mas uma realidade atual. Lutar para conquistar essa ameaça exige medidas imediatas e uma estratégia de longo prazo para preservar os nossos recursos naturais e assegurar um futuro mais seguro e justo para todos.">
+            <img src="WhatsApp Image 2025-03-17 at 09.59.28 (1).jpeg">
+          </a>
+          <div class="content">
+            <h3>4. "AS MUDANÇAS CLIMÁTICAS NO BRASIL E SEUS DESAFIOS"</h3>
+            <p>Resumo: Mudanças climáticas, como o próprio termo indica, referem-se a mudanças no clima que estão ocorrendo em todo o planeta e que apresentam efeitos que já podem ser vistos em várias de suas partes.</p>
+          </div>
+          <div class="meta">
+            <time datetime="18/08/2025">18/08/2025</time>
+            <div class="nota">Nota: 720</div>
+          </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="redacao c5" role="listitem">
+          <a href="#" class="thumb" data-index="5" data-title="LIXO ELETRÔNICO" data-text="O descarte incorreto de lixo eletrônico, também conhecido como e-lixo, representa um desafio crescente na sociedade contemporânea. Impulsionado pela rápida obsolescência de aparelhos como celulares, computadores e televisores, esse problema gera sérias consequências ambientais e para a saúde humana, exigindo uma abordagem mais consciente e responsável.
+A composição complexa desses resíduos é o ponto central do problema. Aparelhos eletrônicos contêm uma mistura de substâncias perigosas, como chumbo, cádmio e mercúrio, que, quando descartadas de forma inadequada, podem contaminar o solo e a água. Essa contaminação afeta ecossistemas, prejudica a biodiversidade e, por fim, chega a nossa cadeia alimentar, comprometendo a saúde pública.
+Além disso, a extração e o processamento de matéria-prima para novos eletrônicos consomem grande quantidade de energia e recursos naturais, intensificando a pressão sobre o meio ambiente. A reciclagem, nesse contexto, surge como uma alternativa crucial, pois permite a recuperação de materiais valiosos e reduz a necessidade de mineração.
+Portanto, é fundamental que a sociedade e o governo atuem em conjunto. É preciso incentivar a criação de políticas de logística reversa mais eficientes, onde os fabricantes se responsabilizem pelo ciclo de vida de seus produtos. Do lado do consumidor, a conscientização sobre o descarte correto e a importância da reciclagem são passos essenciais para mitigar os impactos negativos e construir um futuro mais sustentável.">
+            <img src="1716-1.jpg">
+          </a>
+          <div class="content">
+            <h3>5. "AS CONSEQUÊNCIAS DO DESCARTE DE LIXO ELETRÔNICO"</h3>
+            <p>Resumo: Equipamentos elétricos e eletrônicos descartados (como furadeiras, parafusadeiras, telefones, laptops, geladeiras, TVs etc.) são chamados de lixo eletrônico ou Resíduos de Equipamentos Elétricos e Eletrônicos (REEE) e continuam a aumentar em todo o mundo.</p>
+          </div>
+          <div class="meta">
+            <time datetime="27/08/2025">27/08/2025</time>
+            <div class="nota">Nota: 840</div>
+          </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="redacao c6" role="listitem">
+          <a href="#" class="thumb" data-index="6" data-title="ULTRAPROCESSADOS E SUAS CONSEQUÊNCIAS À SAÚDE" data-text="O consumo massivo de alimentos ultraprocessados tornou-se uma característica marcante da sociedade contemporânea, impulsionado pela praticidade e acessibilidade. No entanto, essa conveniência esconde uma série de graves consequências à saúde, que têm contribuido para o aumento de doenças crônicas e a deterioração da qualidade de vida da população.
+A principal problemática reside na composição desses produtos. Ricos em gorduras saturadas, sódio, açúcares e aditivos químicos, os ultraprocessados são desenhados para serem hiperpalatáveis, ou seja, viciantes. Seu baixo valor nutricional e a ausência de fibras e vitaminas os tomam calorias vazias, que não fornecem os nutrientes necessários para o bom funcionamento do organismo
+Como resultado, o consumo regular desses alimentos esta diretamente associado a uma série de problemas de saude
+Doenças como obesidade, diabetes tipo 2 e hipertensão, que antes eram mais restritas a adultos, agora afetam cada vez mais jovens e crianças. Além disso, estudos recentes apontam uma ligação entre dietas baseadas em ultraprocessados e o desenvolvimento de doenças cardiovasculares e até mesmo alguns tipos de câncer.
+Diante desse cenário, a conscientização é a primeira e mais importante ferramenta. É fundamental que a população principalmente os jovens, aprenda a ler rótulos e a fazer escolhas alimentares mais conscientes. A promoção de hábitos saudáveis, como o consumo de alimentos in natura, é um passo crucial para reverter essa tendência e garantir um futuro com mais saúde e bem-estar para todos.">
+            <img src="alimentos-ultraprocessados.webp">
+          </a>
+          <div class="content">
+            <h3>6. "O CONSUMO DE ULTRAPROCESSADOS E SUAS CONSEQUÊNCIAS À SAÚDE”</h3>
+            <p>Resumo: Alimentos ultraprocessados, geralmente, são ricos em componentes como gorduras, açúcares e sódio. Quando consumidos em excesso, podem ser maléficos à saúde.</p>
+          </div>
+          <div class="meta">
+            <time datetime="02/09/2025">02/09/2025</time>
+            <div class="nota">Nota: 825</div>
+          </div>
+        </article>
+
+        <!-- 7 -->
+        <article class="redacao c7" role="listitem">
+          <a href="#" class="thumb" data-index="7" data-title="DEPENDÊNCIA EM JOGOS DE APOSTAS NA WEB" data-text="O crescimento exponencial das plataformas de jogos de apostas na internet tem atraido um número cada vez maior de jovens, gerando uma preocupante onda de dependência. Esse fenômeno, impulsionado por uma combinação de fatores psicológicos e sociais, acarreta graves consequências não apenas para a vida individual, mas também para a estrutura familiar e social.
+Um dos principais fatores que contribuem para a dependência é a ilusão de ganho fácil. As plataformas utilizam algoritmos e bônus atrativos para criar a sensação de controle sobre o resultado, estimulando o jogador a continuar apostando na esperança de reverter as perdas. Além disso, a facilidade de acesso através de celulares e a pressão de grupos de amigos em ambientes digitais podem funcionar como gatilhos para o inicio e o aprofundamento do vício.
+Os efeitos dessa dependência são devastadores. A busca incessante por dinheiro leva a problemas financeiros severos, endividamento e, em muitos casos, o abandono dos estudos e do trabalho. A saúde mental é diretamente afetada, manifestando-se em quadros de ansiedade, depressão e irritabilidade. O isolamento social também é uma consequência comum, já que o jogador prioriza o mundo virtual em detrimento de suas relações interpessoais.
+Diante disso, é urgente que a sociedade e o governo atuem em conjunto. É necessário promover a conscientização sobre os riscos e perigos das apostas online, especialmente entre os jovens. Além disso, é fundamental que haja uma regulamentação mais rigorosa dessas plataformas, bem como a oferta de apoio e tratamento psicológico para aqueles que já estão sofrendo com a dependência.">
+            <img src="Capa_Vicio-em-apostas-online-e-comparavel-a-epidemia-de-saude-publica-alerta-Altay-de-Souza-1-2.jpg">
+          </a>
+          <div class="content">
+            <h3>7. "FATORES E EFEITOS DA DEPENDÊNCIA EM JOGOS DE APOSTAS NA WEB"</h3>
+            <p>Resumo: Com o avanço da tecnologia, os jogos de apostas online tornaram-se uma forma popular de entretenimento para muitas pessoas em todo o mundo. No entanto, por trás da diversão aparente, existe um perigo real: a dependência em jogos de apostas online.</p>
+          </div>
+          <div class="meta">
+            <time datetime="09/09/2025">09/09/2025</time>
+            <div class="nota">Nota: 800</div>
+          </div>
+        </article>
+
+        <!-- 8 -->
+        <article class="redacao c8" role="listitem">
+          <a href="#" class="thumb" data-index="8" data-title="COMBATE ÀS DESIGUALDADES SOCIAIS" data-text="O Brasil, com sua vasta extensão territorial e diversidade cultural, infelizmente carrega a marca profunda das desigualdades sociais. A disparidade entre aqueles que têm muito e os que têm quase nada é um obstáculo gigantesco para o desenvolvimento do país. Nesse cenário complexo, o trabalho voluntário emerge como uma ferramenta poderosa, capaz de atenuar essas diferenças e construir pontes de solidariedade
+O voluntariado não se resume a uma simples doação de tempo; ele é um ato de cidadania ativa. Ao dedicarmos horas ou dias a uma causa, seja na educação, saúde ou assistência social, estamos investindo diretamente em comunidades carentes. E a mão que ensina a ler, que oferece um prato de comida ou que restaura um lar. Para o jovem, participar de ações voluntárias é ter a oportunidade de sair da bolha, de enxergar a realidade do outro e desenvolver uma consciência social mais crítica.
+Essa participação direta tem um impacto real. Ao levar recursos e atenção para onde o Estado, por vezes, não alcança com a devida agilidade, o voluntário atua como um agente de transformação. Ele não apenas oferece ajuda imediata, mas também inspira a mudança e fortalece o senso de comunidade. O trabalho voluntário é, portanto, essencial: ele injeta humanidade e esperança onde a frieza da desigualdade tenta dominar, provando que a união de esforços é o caminho mais eficaz para um país mais justo e igualitário.">
+            <img src="voluntariado.jpg" >
+          </a>
+          <div class="content">
+            <h3>8. "A IMPORTÂNCIA DO TRABALHO VOLUNTÁRIO NO COMBATE ÀS DESIGUALDADES SOCIAIS”</h3>
+            <p>Resumo: Grupos, organizações, ongs, entre outras representações espalhadas pelo mundo inteiro coordenam campanhas, projetos e ações com o foco em iniciativas que visam o trabalho social e o bem-estar das pessoas que são atendidas e que vivem em situação de vulnerabilidade social.
+</p>
+          </div>
+          <div class="meta">
+            <time datetime="15/09/2025">15/09/2025</time>
+            <div class="nota">Nota: 800</div>
+          </div>
+        </article>
+
+        <!-- 9 -->
+        <article class="redacao c9" role="listitem">
+          <a href="#" class="thumb" data-index="9" data-title="ADULTIZAÇÃO" data-text="A adultizacao, esse assunto que vem sendo tomado ultimamente e muito importante, esse problema vem destruindo infâncias e acabando com a saúde mental de crianças, assim como aconteceu o caso da influenciadora Kamilinha que repercutiu nas redes sociais, e ela mesma nao reconhece que foi vitima desse crime.
+Assim como o caso dela, está ocorrendo muitos outros pelo mundo todo, e muitos não levados a serio algo de extrema importância que destrói a infância levando a futuros problemas psicológicos tanto quando na fase infantil como na fase adulta podendo gerar traumas psicológicos.
+Não devemos normalizar esse crime que acaba com a saude mental das crianças e infelizmente sendo levado a algo normal, Isso deve ser espalhado para todos e quanto mais for levado a serio, antes pode ser resolvido e acabar com isso.
+A adultizacao vem desde vestir uma criança de forma vulgar não conveniente a sua idade, desde utilizar crianças com teor sexual para gerar lucro, no caso causando mais de um crime assim como no caso da influenciadora.">
+            <img src="crianca-no-computador.webp">
+          </a>
+          <div class="content">
+            <h3>9. “ADULTIZAÇÃO INFANTIL – CONSEQUÊNCIAS DA PERDA IRREPARÁVEL DA INFÂNCIA"</h3>
+            <p>Resumo: A adultização é um fenômeno em ascensão, que acontece quando crianças são incentivadas, intencionalmente ou não, a adotarem preocupações, responsabilidades e até mesmo comportamentos adultos.</p>
+          </div>
+          <div class="meta">
+            <time datetime="26/09/2025">26/09/2025</time>
+            <div class="nota">Nota: 610</div>
+          </div>
+        </article>
+
+        <!-- 10 -->
+        <article class="redacao c10" role="listitem">
+          <a href="#" class="thumb" data-index="10" data-title="ETARISMO" data-text="Infelizmente a idade chega a todos, e esse fenômeno envelhecer não deveria ser simbolizado como algo ruim, ja que ao chegar a idade ja aproveitamos muito a vida e vivemos todas as melhores experiencias.
+Hoje esse preconceito com o envelhecimento está afetando psicologicamente os nossos idosos, envelhecer é algo normal e chega a todos, esse preconceito prejudica a saúde mental de pessoas que ja são fragilizadas e precisam de apoio da sociedade e, infelizmente estão sendo tratados da pior maneira pela sociedade.
+Esse tratamento não afeta apenas a saudade mental, e sim a saúde física, pois por falta de acessibilidade e da inclusão estão deixando de frequentar locais para realizar atividades físicas.
+A solução não é apenas punição para quem comete o ato, mas sim a conscientização sobre o assunto, a sociedade ter consciência sobre o mal que isso faz para uma pessoa já fragilizada e que precisa da ajuda da sociedade e de acessibilidade e não exclusão e preconceito.">
+            <img src="saúde-e-qualidade-de-vida-como-conquistar.jpg">
+          </a>
+          <div class="content">
+            <h3>10. “CAMINHOS PARA COMBATER O ETARISMO NAS RELAÇÕES SOCIAIS"
+</h3>
+            <p>Resumo: O etarismo, também chamado de idadismo, refere-se ao preconceito com base na idade, afetando especialmente a população idosa.</p>
+          </div>
+          <div class="meta">
+            <time datetime="26/09/2025">26/09/2025</time>
+            <div class="nota">Nota: 705</div>
+          </div>
+        </article>
+
+        <!-- 11 -->
+        <article class="redacao c11" role="listitem">
+          <a href="#" class="thumb" data-index="11" data-title="EDUCAÇÃO FINANCEIRA" data-text="Nos últimos anos, a educação financeira tem se mostrado cada vez mais essencial para a vida dos jovens. Em um mundo marcado pelo consumo rápido e pela facilidade de acesso ao crédito, saber lidar com o próprio dinheiro deixou de ser apenas um diferencial para se tornar uma necessidade. Como disse Nelson Mandela, A educação é a arma mais poderosa que você pode usar para mudar o mundo, e isso também se aplica ao conhecimento sobre finanças, que pode transformar escolhas e garantir um futuro mais seguro.
+Muitos jovens entram na vida adulta sem entender conceitos básteos, como juros, orçamento ou investimento. Isso os torna mais vulneráveis a dividas e decisões impulsivas. Por outro lado, quando a educação financeira está presente desde cedo, o jovem aprende a planejar, estabelecer prioridades e compreender que pequenas atitudes hoje podem gerar grandes resultados amanhã
+Além disso, a educação financeira contribui para a autonomia. Um jovem que sabe administrar seu dinheiro tende a ter mais confiança para realizar sonhos, como viajar, estudar ou abrir um negócio. Portanto, toma-se fundamental que escolas e famílias abordem esse tema com mais seriedade. Educar financeiramente é preparar o jovem para enfrentar desafios, fazer escolhas conscientes e construir um futuro mais equilibrado.">
+            <img src="imagem-website-site-1.webp">
+          </a>
+          <div class="content">
+            <h3>11. “A IMPORTÂNCIA DA EDUCAÇÃO FINANCEIRA PARA OS JOVENS"</h3>
+            <p>Resumo: Envolver a criança no planejamento e orçamento familiar é o primeiro passo para a educação financeira. “Quebrar o tabu de falar com os filhos, com as crianças, sobre dinheiro.</p>
+          </div>
+          <div class="meta">
+            <time datetime="10/10/2025">10/10/2025</time>
+            <div class="nota">Nota: 880</div>
+          </div>
+        </article>
+
+        <!-- 12 -->
+        <article class="redacao c12" role="listitem">
+          <a href="#" class="thumb" data-index="12" data-title="VALORIZAÇÃO DA CULTURA POPULAR BRASILEIRA" data-text="A cultura popular brasileira é uma das maiores riquezas do país, formada por tradições, músicas, danças e costumes que atravessam gerações. No entanto, apesar de sua importância histórica e social, ainda enfrenta muitos desafios para ser valorizada de forma justa. Como afirmou Nelson Mandela, A educação é a arma mais poderosa que você pode usar para mudar o mundo, e, nesse sentido, o conhecimento sobre a própria cultura também é uma forma de transformação.
+Um dos principais obstáculos é a falta de incentivo e reconhecimento. Muitas manifestações, como o maracatu, o jongo ou o boi-bumbá, são vistas apenas como entretenimento, quando, na verdade, carregam histórias profundas sobre resistência e identidade. Além disso, a influência de produtos culturais estrangeiros, facilmente difundidos pela internet, faz com que parte dos jovens desconheça ou não se interesse pelas tradições brasileiras.
+Outro desafio é a ausência de investimentos públicos consistentes. Sem apoio, grupos culturais têm dificuldade para se manter e transmitir seus saberes às novas gerações. Por isso, é fundamental que escolas, famílias e o governo assumam a responsabilidade de preservar essas manifestações.
+Valorizar a cultura popular não é olhar para o passado, mas reconhecer quem somos. Ao compreender nossas raízes, fortalecemos nossa identidade e construímos um futuro mais consciente e diverso.">
+            <img src="unnamed.jpg">
+          </a>
+          <div class="content">
+            <h3>12. "DESAFIOS PARA A VALORIZAÇÃO DA CULTURA POPULAR BRASILEIRA"</h3>
+            <p>Resumo: As manifestações culturais são essenciais para fortalecer a identidade e a memória coletiva de uma comunidade. Elas representam a história, os costumes e os valores de gerações.</p>
+          </div>
+          <div class="meta">
+            <time datetime="17/10/2025">17/10/2025</time>
+            <div class="nota">Nota: 800</div>
+          </div>
+        </article>
+
+        <!-- 13 -->
+        <article class="redacao c13" role="listitem">
+          <a href="#" class="thumb" data-index="13" data-title="UNIVERSALIZAÇÃO DO SANEAMENTO BÁSICO" data-text="O saneamento básico é um direito fundamental, mas ainda distante da realidade de milhões de brasileiros. A falta de acesso a agua tratada e coleta de esgoto compromete não apenas a saúde pública, mas também a dignidade humana.
+Nesse contexto, a frase de Nelson Mandela, A educação é a arma mais poderosa que você pode usar para mudar o mundo, reflete a importância do conhecimento e da conscientização para transformar essa realidade.
+Um dos principais desafios esta na desigualdade regional. Enquanto algumas cidades contam com sistemas modernos, outras, especialmente nas periferias e áreas rurais, convivem com esgoto a céu aberto. A ausência de investimentos contínuos e a má gestão dos recursos também dificultam o avanço das obras necessárias.
+Para mudar esse cenário, é essencial que o governo amplie políticas públicas eficientes, direcionando verbas para projetos de infraestrutura e fiscalizando sua execução. Além disso, parcerias com empresas privadas podem acelerar a expansão dos serviços, desde que haja transparência e foco na população mais vulnerável.
+A educação da sociedade também desempenha papel importante, pois aumenta a cobrança por soluções e reforça a importância do uso responsável da água. Assim, universalizar o saneamento básico é garantir saúde, cidadania e melhores condições de vida para todos os brasileiros.">
+            <img src="por-que-ainda-precisamos-falar-sobre-saneamento-basico.jpg">
+          </a>
+          <div class="content">
+            <h3>13. “CAMINHOS PARA A UNIVERSALIZAÇÃO DO SANEAMENTO BÁSICO NO BRASIL”</h3>
+            <p>Resumo: A palavra “saneamento” tem origem no latim sanus, que significa “de boa saúde, sadio”. Atualmente, ela é usada para designar serviços que promovem a saúde e melhoram a qualidade de vida das pessoas.</p>
+          </div>
+          <div class="meta">
+            <time datetime="24/10/2025">24/10/2025</time>
+            <div class="nota">Nota: 825</div>
+          </div>
+        </article>
+
+        <!-- 14 -->
+        <article class="redacao c14" role="listitem">
+          <a href="#" class="thumb" data-index="14" data-title="O ESPORTE COMO FERRAMENTA DE TRANSFORMAÇÃO SOCIAL" data-text="O esporte vai muito além da competição: ele é uma poderosa ferramenta de transformação social. Em diversas comunidades brasileiras, práticas esportivas têm oferecido oportunidades que vão desde o desenvolvimento físico até a construção de valores importantes. Nesse sentido, a frase de Nelson Mandela, A educação é a arma mais poderosa que você pode usar para mudar o mundo, também se aplica ao esporte, que educa, orienta e abre caminhos para uma vida melhor.
+Um dos principais impactos do esporte está na formação cidadã. Ao participar de atividades esportivas, jovens aprendem disciplina, respeito, cooperação e perseverança — valores essenciais dentro e fora das quadras. Além disso, o esporte funciona como alternativa saudável ao tempo ocioso, reduzindo a exposição a situações de risco, como violência e uso de drogas.
+Outro ponto importante é o papel social de projetos esportivos comunitários. Muitas iniciativas oferecem não apenas treinos, mas também acompanhamento escolar e apoio psicológico, ajudando na inclusão de crianças e adolescentes em situação de vulnerabilidade. No entanto, ainda faltam investimentos e políticas públicas que ampliem o acesso ao esporte de qualidade.
+Portanto, reconhecer o esporte como instrumento de transformação é compreender que ele forma cidadãos, abre porta e promove esperança. Investir em esporte é investir no futuro.">
+            <img src="como-falar-sobre-esportes-em-espanhol.png">
+          </a>
+          <div class="content">
+            <h3>14. “O PAPEL DO ESPORTE COMO FERRAMENTA DE TRANSFORMAÇÃO SOCIAL”</h3>
+            <p>Resumo: Quando orientados de maneira correta, os exercícios funcionam como peças-chave para aprender a ter mais empatia e respeito.</p>
+          </div>
+          <div class="meta">
+            <time datetime="31/10/2025">31/10/2025</time>
+            <div class="nota">Nota: 960</div>
+          </div>
+        </article>
+
+        <!-- 15 -->
+        <article class="redacao c15" role="listitem">
+          <a href="#" class="thumb" data-index="15" data-title="Agradecimentos">
+            <img src="Umbará é o bairro 44.jpg">
+          </a>
+          <div class="content">
+            <h3>Gratidão e encerramento</h3>
+            <p>Sou muito grato por contar com amizades e experiências incríveis que acresentaram diversos ensinamentos que vão ficar pra minha vida toda. Devo aos professores, por lidarem com minhas gracinhas diariamente, e, por me ouvirem e tirarem diversas dúvidas, meus sinceros agradecimentos.
+                </p>
+          </div>
+          <div class="meta">
+            <time datetime="2025-11-15">2025</time>
+          </div>
+        </article>
+
+      </section>
+    </main>
+
+    <!-- Modal para leitura -->
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-card" role="document">
+        <header>
+          <h3 id="modal-title">Título</h3>
+          <div>
+            <button id="fecharModal" aria-label="Fechar">Fechar ✕</button>
+          </div>
+        </header>
+        <div id="modal-body" style="margin-top:.75rem;white-space:pre-wrap;color:var(--muted)"></div>
+      </div>
+    </div>
+
+    <footer id="agradecimentos">
+      <p>Obrigado por tudo Buiu. Não sentirei falta de fazer mais sites.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Menu hambúrguer (simples)
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    hamburger && hamburger.addEventListener('click', ()=>{
+      if(navLinks.style.display === 'flex') navLinks.style.display = '';
+      else navLinks.style.display = 'flex';
+    });
+
+    // Modal de leitura: pega atributos data-text e mostra no modal
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+    const fecharModal = document.getElementById('fecharModal');
+
+    document.querySelectorAll('.thumb').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const title = btn.getAttribute('data-title') || 'Redação';
+        const text = btn.getAttribute('data-text') || 'Texto completo não fornecido. Substitua data-text pelo texto real da redação.';
+        modalTitle.textContent = title;
+        modalBody.textContent = text;
+        modal.classList.add('open');
+        fecharModal.focus();
+      });
+    });
+
+    fecharModal.addEventListener('click', ()=>{
+      modal.classList.remove('open');
+    });
+
+    modal.addEventListener('click', (e)=>{
+      if(e.target === modal) modal.classList.remove('open');
+    });
+
+    (function(){
+      try{
+        const key='portfolio_visits_v1';
+        const visits = Number(localStorage.getItem(key) || 0) + 1;
+        localStorage.setItem(key, visits);
+       
+        console.log('Visitas ao portfólio (local):', visits);
+      }catch(e){console.warn('LocalStorage indisponível')}
+    })();
+  </script>
+</body>
+</html>
